@@ -1,7 +1,15 @@
 const express = require("express");
+
 const router = express.Router();
 
 let db = [1, 2, 3, 4, 5];
+let usersArr = [
+  { name: "kenny", age: 8, gender: "m" },
+  { name: "john", age: 40, gender: "m" },
+  { name: "james", age: 40, gender: "m" },
+  { name: "merry", age: 30, gender: "f" },
+  { name: "naomi", age: 35, gender: "f" },
+];
 
 router.get("/", (req, res) => {
   res.json(db);
@@ -24,6 +32,19 @@ router.get("/getnumber", (req, res) => {
   } catch (err) {
     console.log(err);
   }
+});
+
+router.get("/biggerthen/:age", (req, res) => {
+  res.json(usersArr.filter((user) => user.age > +req.params.age));
+});
+
+router.get("/gender/:gender", (req, res) => {
+  console.log(req.params.gender, req.query.age);
+  res.json(
+    usersArr.filter(
+      (user) => user.gender === req.params.gender && +req.query.age < user.age
+    )
+  );
 });
 
 module.exports = router;
