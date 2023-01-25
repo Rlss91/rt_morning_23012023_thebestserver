@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div>
+      <button onclick="sendAjaxGetRequest()">get</button>
+      <div id="images"></div>
+    </div>
+    <script>
+      const sendAjaxGetRequest = async () => {
+        let str = "";
+        try {
+          let response = await axios.get(
+            "http://localhost:3000/api/list/getcharacters"
+          );
+          console.log(response.data);
+          for (let char of response.data.results) {
+            str += `<img src="${char.image}" /><br />`;
+          }
+          document.getElementById("images").innerHTML = str;
+        } catch (err) {}
+      };
+    </script>
+  </body>
+</html>

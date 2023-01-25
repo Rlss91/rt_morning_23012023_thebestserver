@@ -1,4 +1,5 @@
 const express = require("express");
+const axios = require("axios");
 
 const router = express.Router();
 
@@ -45,6 +46,20 @@ router.get("/gender/:gender", (req, res) => {
       (user) => user.gender === req.params.gender && +req.query.age < user.age
     )
   );
+});
+
+router.post("/newuser", (req, res) => {
+  usersArr = [...usersArr, req.body];
+  res.json(usersArr);
+});
+
+router.get("/getcharacters", async (req, res) => {
+  try {
+    let response = await axios.get("https://rickandmortyapi.com/api/character");
+    res.json(response.data);
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 module.exports = router;
