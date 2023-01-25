@@ -12,7 +12,29 @@
       <button onclick="sendAjaxGetRequest()">get</button>
       <div id="images"></div>
     </div>
+    <div>
+      <input type="text" id="postName" placeholder="name" />
+      <input type="number" id="postAge" placeholder="age" />
+      <input type="text" id="postGender" placeholder="m/f" />
+      <button onclick="sendAjaxPostRequest()">post</button>
+    </div>
     <script>
+      const sendAjaxPostRequest = async () => {
+        try {
+          const { data } = await axios.post(
+            "http://localhost:3000/api/list/newuser",
+            {
+              name: document.getElementById("postName").value,
+              age: document.getElementById("postAge").value,
+              gender: document.getElementById("postGender").value,
+            }
+          );
+          console.log(data);
+          //const response = await axios.post....
+          //const data = response.data
+        } catch (err) {}
+      };
+
       const sendAjaxGetRequest = async () => {
         let str = "";
         try {
