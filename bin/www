@@ -7,6 +7,18 @@
 var app = require("../app");
 var debug = require("debug")("thebestserver:server");
 var http = require("http");
+const connectToDB = require("../model/connectToDB");
+
+connectToDB
+  .then(() => {
+    console.log("connected");
+    debug("connected to db");
+  })
+  .catch((err) => {
+    debug("fatal error");
+    debug(err);
+    process.exit(1);
+  });
 
 /**
  * Get port from environment and store in Express.
