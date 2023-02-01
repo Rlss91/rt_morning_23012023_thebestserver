@@ -64,7 +64,7 @@ router.post("/login", async (req, res) => {
       }
       throw new ResponseError("db", ["invalid email and or password"]);
     }
-    const token = jwt.generateToken({ id: userData._id });
+    const token = await jwt.generateToken({ id: userData._id });
     res.json({ msg: "success", token });
   } catch (err) {
     res.status(400).json({ err });
