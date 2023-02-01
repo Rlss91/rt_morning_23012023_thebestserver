@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "set DEBUG=thebestserver:*&& nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "dev2": "set DEBUG=thebestserver:*&& nodemon ./bin/www"
   },
   "dependencies": {
     "axios": "^1.2.4",
