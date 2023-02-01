@@ -17,9 +17,26 @@ const registerSchema = Joi.object({
   avatar: Joi.string().trim(),
 });
 
+const loginSchema = Joi.object({
+  email: Joi.string().min(5).max(255).email().required().trim(),
+  password: Joi.string()
+    .regex(
+      new RegExp("^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#$%^&*()_+]).{0,}$")
+    )
+    .min(3)
+    .max(255)
+    .required()
+    .messages({
+      "string.pattern.base": "password rules",
+    }),
+});
+
 const validateRegisterSchema = (userInput) =>
   validate(userInput, registerSchema);
 
+const validateLoginSchema = (userInput) => validate(userInput, loginSchema);
+
 module.exports = {
   validateRegisterSchema,
+  validateLoginSchema,
 };

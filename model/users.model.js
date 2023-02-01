@@ -8,6 +8,11 @@ const usersSchema = new Schema({
   password: { type: String, required: true },
   avatar: { type: String },
   isSuperUser: { type: Boolean, default: false },
+  accountSecurity: {
+    failedAttempts: { type: Number, default: 0 },
+    accountBlocked: { type: Boolean, default: false },
+    lastLoginAttempt: { type: Date, default: Date.now },
+  },
 });
 
 /*
@@ -27,7 +32,24 @@ const findUserByEmail = (email) => {
   */
 };
 
+const blockAccount = (_id) => {
+  return Users.findByIdAndUpdate(_id, {
+    "accountSecurity.accountBlocked": true,
+    "accountSecurity.failedAttempts": 0,
+    "accountSecurity.lastLoginAttempt": Date.now(),
+  });
+};
+
+const setFailedAttempt = (_id, num) => {
+  return Users.findByIdAndUpdate(_id, {
+    "accountSecurity.failedAttempts": num,
+    "accountSecurity.lastLoginAttempt": Date.now(),
+  });
+};
+
 module.exports = {
   createNewUser,
   findUserByEmail,
+  blockAccount,
+  setFailedAttempt,
 };
