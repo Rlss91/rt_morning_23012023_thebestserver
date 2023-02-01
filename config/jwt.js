@@ -4,7 +4,7 @@ const generateToken = (payload, exp = "30d") => {
   return new Promise((resolve, reject) => {
     jwt.sign(
       payload,
-      "f34pq2ok0g923jy-0439kt-w0roigkewr-0gk",
+      process.env.JWTSECRETKEY,
       { expiresIn: exp },
       (err, token) => {
         if (err) {
@@ -19,14 +19,10 @@ const generateToken = (payload, exp = "30d") => {
 
 const verifyToken = (token) => {
   return new Promise((resolve, reject) => {
-    jwt.verify(
-      token,
-      "f34pq2ok0g923jy-0439kt-w0roigkewr-0gk",
-      (err, payload) => {
-        if (err) reject(err);
-        else resolve(payload);
-      }
-    );
+    jwt.verify(token, process.env.JWTSECRETKEY, (err, payload) => {
+      if (err) reject(err);
+      else resolve(payload);
+    });
   });
 };
 
