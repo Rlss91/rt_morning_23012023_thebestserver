@@ -3,6 +3,7 @@ const router = express.Router();
 const listRouter = require("./api/list");
 const animalsRouter = require("./api/animals");
 const authRouter = require("./api/auth");
+const productsRouter = require("./api/products");
 
 // sub route
 // http://localhost:3000/api/
@@ -17,5 +18,7 @@ router.use("/list", listRouter);
 router.use("/animals", animalsRouter);
 
 router.use("/auth", authRouter);
+
+router.use("/products", productsRouter);
 
 module.exports = router; //exports only router without need of object
