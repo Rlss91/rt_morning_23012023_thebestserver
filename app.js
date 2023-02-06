@@ -9,9 +9,7 @@ const app = express();
 const apiRouter = require("./routes/api");
 
 if (!fs.existsSync(path.join(__dirname, "uploads"))) {
-  fs.mkdir(path.join(__dirname, "uploads"), { recursive: true }, (err) => {
-    if (err) throw err;
-  });
+  fs.mkdirSync(path.join(__dirname, "uploads"), { recursive: true });
 }
 
 app.use(cors());
