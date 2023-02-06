@@ -34,4 +34,16 @@ router.post("/", upload.single("avatar"), async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const validateValues = await productsValidation.validateRemoveProductSchema(
+      req.params
+    );
+    await productsModel.removeProduct(validateValues.id);
+    res.json({ msg: "success" });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
 module.exports = router;

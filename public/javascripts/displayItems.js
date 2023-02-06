@@ -14,12 +14,26 @@ window.addEventListener("load", async () => {
               <p class="card-text">
                 ${item.description}
               </p>
+              <button type="button" class="btn btn-danger" id="${item._id}">Delete</button>
             </div>
           </div>
         </div>
         `;
     }
     document.getElementById("productsDiv").innerHTML = htmlStr;
+    for (let item of data) {
+      document
+        .getElementById(item._id)
+        .addEventListener("click", async (ev) => {
+          try {
+            await axios.delete(
+              `http://localhost:3000/api/products/${ev.target.id}`
+            );
+            location.reload(); // refresh
+            // console.log(ev);
+          } catch (err) {}
+        });
+    }
   } catch (err) {
     console.log("err", err);
   }

@@ -25,7 +25,12 @@ const insertNewProduct = (productData) => {
   return newProduct.save();
 };
 
+const removeProduct = (id) => {
+  return Products.findByIdAndRemove(id);
+};
+
 module.exports = {
   findAllProducts,
   insertNewProduct,
+  removeProduct,
 };
