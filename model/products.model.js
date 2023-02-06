@@ -20,6 +20,12 @@ const findAllProducts = (pageNum = 1, itemsPerPage = 20) => {
     .limit(itemsPerPage);
 };
 
+const insertNewProduct = (productData) => {
+  const newProduct = new Products(productData);
+  return newProduct.save();
+};
+
 module.exports = {
   findAllProducts,
+  insertNewProduct,
 };

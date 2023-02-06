@@ -24,7 +24,11 @@ router.post("/", upload.single("avatar"), async (req, res) => {
     const validateValues = await productsValidation.validateAddNewProductSchema(
       req.body
     );
-    console.log(validateValues);
+    await productsModel.insertNewProduct({
+      ...validateValues,
+      img: req.file.filename,
+    });
+    res.json({ msg: "success" });
   } catch (err) {
     res.status(400).json({ err });
   }

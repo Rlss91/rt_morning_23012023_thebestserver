@@ -3,9 +3,16 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
+const fs = require("node:fs");
 const app = express();
 
 const apiRouter = require("./routes/api");
+
+if (!fs.existsSync(path.join(__dirname, "uploads"))) {
+  fs.mkdir(path.join(__dirname, "uploads"), { recursive: true }, (err) => {
+    if (err) throw err;
+  });
+}
 
 app.use(cors());
 app.use(logger("dev"));
@@ -16,6 +23,8 @@ app.use(cookieParser());
 
 // http://localhost:3000/api/....
 app.use("/api", apiRouter);
+
+const createUploadsDirectory = () => {};
 
 // //GET http://localhost:3000/
 // app.get("/", (req, res) => {
