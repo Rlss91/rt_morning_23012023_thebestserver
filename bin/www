@@ -7,7 +7,7 @@ require("dotenv").config();
 var app = require("../app");
 var debug = require("debug")("thebestserver:server");
 var http = require("http");
-const connectToDB = require("../model/connectToDB");
+const connectToDB = require("../model/mongo/connectToDB");
 
 connectToDB
   .then(() => {

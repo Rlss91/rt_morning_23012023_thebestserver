@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../../config/multer");
-const productsModel = require("../../model/products.model");
+const productsModel = require("../../model/mongo/products.model");
 const productsValidation = require("../../validation/products.validation");
 
 router.get("/:pageNum/:itemsPerPage", async (req, res) => {

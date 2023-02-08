@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-const usersModel = require("../../model/users.model");
+const usersModel = require("../../model/mongo/users.model");
 const authValidation = require("../../validation/auth.validation");
 const ResponseError = require("../../module/ResponseError");
 const bcrypt = require("../../config/bcrypt");
