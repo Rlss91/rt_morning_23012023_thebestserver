@@ -1,7 +1,7 @@
 window.addEventListener("load", async () => {
   try {
     let { data } = await axios.get("http://localhost:3000/api/products/1/50");
-    // console.log(data);
+    console.log(data);
     let htmlStr = "";
     for (let item of data) {
       htmlStr += `
@@ -14,7 +14,7 @@ window.addEventListener("load", async () => {
               <p class="card-text">
                 ${item.description}
               </p>
-              <button type="button" class="btn btn-danger" id="${item._id}">Delete</button>
+              <button type="button" class="btn btn-danger" id="${item.idproduct}">Delete</button>
             </div>
           </div>
         </div>
@@ -23,7 +23,7 @@ window.addEventListener("load", async () => {
     document.getElementById("productsDiv").innerHTML = htmlStr;
     for (let item of data) {
       document
-        .getElementById(item._id)
+        .getElementById(item.idproduct)
         .addEventListener("click", async (ev) => {
           try {
             await axios.delete(

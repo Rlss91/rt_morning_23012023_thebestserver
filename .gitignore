@@ -62,3 +62,6 @@ typings/
 
 # ignore uploads
 uploads/
+
+hostkey.cnf
+l.config.json

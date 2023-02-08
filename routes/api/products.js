@@ -34,16 +34,26 @@ router.post("/", upload.single("avatar"), async (req, res) => {
   }
 });
 
-// router.delete("/:id", async (req, res) => {
-//   try {
-//     const validateValues = await productsValidation.validateRemoveProductSchema(
-//       req.params
-//     );
-//     await productsModel.removeProduct(validateValues.id);
-//     res.json({ msg: "success" });
-//   } catch (err) {
-//     res.status(400).json({ err });
-//   }
-// });
+router.patch("/:id", async (req, res) => {
+  try {
+    //! joi validation!!!
+    await productsModel.updateProduct(req.params.id, req.body);
+    res.json({ msg: "success" });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  try {
+    // const validateValues = await productsValidation.validateRemoveProductSchema(
+    //   req.params
+    // );
+    await productsModel.removeProduct(req.params.id);
+    res.json({ msg: "success" });
+  } catch (err) {
+    res.status(400).json({ err });
+  }
+});
 
 module.exports = router;
