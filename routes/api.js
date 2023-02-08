@@ -4,6 +4,7 @@ const listRouter = require("./api/list");
 const animalsRouter = require("./api/animals");
 const authRouter = require("./api/auth");
 const productsRouter = require("./api/products");
+const ordersRouter = require("./api/orders");
 const authMW = require("../middleware/auth.mw");
 
 // sub route
@@ -22,5 +23,7 @@ router.use("/auth", authRouter);
 
 router.use("/products", productsRouter);
 // router.use("/products", authMW, productsRouter);
+
+router.use("/orders", ordersRouter);
 
 module.exports = router; //exports only router without need of object

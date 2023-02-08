@@ -23,7 +23,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // http://localhost:3000/api/....
 app.use("/api", apiRouter);
 
-const createUploadsDirectory = () => {};
+app.use("*", (req, res) => {
+  res.status(404).json({ msg: "api not found" });
+});
 
 // //GET http://localhost:3000/
 // app.get("/", (req, res) => {
